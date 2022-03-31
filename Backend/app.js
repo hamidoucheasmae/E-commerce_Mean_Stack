@@ -2,6 +2,7 @@ const express =require('express');
 const app =express();
 const bodyParser =require('body-parser');
 const morgan =require('morgan');
+const mongoose =require('mongoose');
 
 
 // middleware
@@ -27,6 +28,15 @@ app.post(`${api}/products`,(req, res)=>{
    console.log(newProduct);
     res.send(newProduct);
 })
+
+mongoose.connect(process.env.CONNECTION_STRING)
+ .then (()=>{
+     console.log('Database Connection IS ready..')
+ })
+ .catch((err)=>
+ {
+    console.log(err);
+ })
 
 app.listen(3000, ()=>{
   
